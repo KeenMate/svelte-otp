@@ -2,17 +2,27 @@
   import { createEventDispatcher, tick } from "svelte";
   import TextField from "./TextField.svelte";
   const dispatch = createEventDispatcher();
-  const Separator = 0x42;
+  const Separator = '-';
   export let value;
-  export let pattern = "[0-9]{3}";
+  export let onlyNumbers = true;
   // Not reactive
   export let chunks = 3;
   export let chunkLength = 3;
+
+  let pattern;
+  $: pattern = createPattern(onlyNumbers,chunkLength)
+
   let chunkInputs = [];
   $: sanitizedValue = sanitizeValue(value);
   $: sanitizedValueWithSeparators = zipWithSeparators(sanitizedValue);
   $: chunksFilled = getChunksFilledCount(sanitizedValue);
   $: chunksFilledChanged(sanitizedValue);
+
+  function createPattern(numbers,length) {
+    console.log((numbers?  "[0-9]":".") + "{"+ length + "}")
+    return (numbers?  "[0-9]":".") + "{"+ length + "}"
+    }
+
 
   function zipWithSeparators(chunks) {
     return chunks.flatMap((c) => [Separator, c]).slice(1);
@@ -26,6 +36,7 @@
   }
 
   function getChunkValues(val) {
+
     const emptyChunks = getEmptyArray(chunks);
     const newChunks = val.match(new RegExp(`.{1,${chunkLength}}`, "g"));
     if (!newChunks) return emptyChunks;
@@ -58,6 +69,7 @@
   }
 
   function beforeChunkChanged(ev, idx) {
+    console.log(ev.data)
     let invalid = false;
     if (ev.data === null) {
       if (sanitizedValue[idx].length === 1)
@@ -79,8 +91,11 @@
       // Skip further input events for this flow
       invalid = true;
     }
-    const parsed = parseInt(ev.data);
-    if (isNaN(parsed)) invalid = true;
+    console.log(ev.data)
+    if(onlyNumbers){
+      const parsed = parseInt(ev.data);
+      if (isNaN(parsed)) invalid = true;
+    }  
     if ((sanitizedValue[idx] + ev.data).length > chunkLength) {
       if (!invalid) {
         // Check if this is not last one
@@ -134,10 +149,11 @@
   }
 
   function chunkChanged(ev, idx) {
+    console.log(ev.data)
     value = getUpdatedChunks(sanitizedValue, getValueFromEvent(ev), idx);
     dispatch("change", value);
   }
-  
+
   function getUpdatedChunks(chunks, value, idx) {
     return chunks.map((x, i) => (i === idx ? value : x));
   }
@@ -150,7 +166,7 @@
       else return event.detail + event.target.value;
     } else return event.target.value;
   }
-  
+
   function getIndexWithoutSeparators(idx) {
     return idx / 2;
   }
