@@ -15,7 +15,7 @@
   />
 </main>
 
-<div >
+<div>
   <h1>Options</h1>
   <div>
     onlyNumbers <input type="checkbox" bind:checked={onlyNumbers} />
@@ -27,13 +27,12 @@
   </div>
   <div>chunks: <input type="number" bind:value={chunksCount} /></div>
   <div>chunkLength: <input type="number" bind:value={chunkLength} /></div>
-	<br/>
+  <br />
   <b>+ styling props </b>
-		<ul>
-			<li>inputClass</li>
-			<li>inputContainerClass</li>
-			<li>containerClass</li>
-			<li>separatorCLass</li>
-		</ul>
-
+  <ul>
+    <li>inputClass</li>
+    <li>inputContainerClass</li>
+    <li>containerClass</li>
+    <li>separatorCLass</li>
+  </ul>
 </div>

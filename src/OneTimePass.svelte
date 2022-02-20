@@ -2,7 +2,7 @@
   import { createEventDispatcher, tick } from "svelte";
   import Chunk from "./Chunk.svelte";
   const dispatch = createEventDispatcher();
-  export const Separator = '-';
+  export const Separator = "-";
   //value is array of values
   export let value;
   export let valueWithSeparators;
@@ -10,25 +10,24 @@
   export let chunksCount = 3;
   export let chunkLength = 3;
 
-	//styles
-  export let inputClass = "otp-default-input"
-  export let inputContainerClass = ""
-  export let containerClass= "one-time-pass"
-  export let separatorCLass = ""
+  //styles
+  export let inputClass = "otp-default-input";
+  export let inputContainerClass = "";
+  export let containerClass = "one-time-pass";
+  export let separatorCLass = "";
 
-  $: valueWithSeparators = value?.join(Separator)
+  $: valueWithSeparators = value?.join(Separator);
   let chunkInputs = [];
-  $: sanitizedValue = sanitizeValue(value,chunksCount);
+  $: sanitizedValue = sanitizeValue(value, chunksCount);
   $: sanitizedValueWithSeparators = zipWithSeparators(sanitizedValue);
   $: ChunksFilledCount = getChunksFilledCount(sanitizedValue);
   $: chunksFilledChanged(sanitizedValue);
 
-  function createPattern(numbers,length) {
-    return (numbers?  "[0-9]":".") + "{"+ length + "}"
-    }
+  function createPattern(numbers, length) {
+    return (numbers ? "[0-9]" : ".") + "{" + length + "}";
+  }
 
-
-  function zipWithSeparators(chunks,chunksCunt) {
+  function zipWithSeparators(chunks, chunksCunt) {
     return chunks.flatMap((c) => [Separator, c]).slice(1);
   }
 
@@ -40,7 +39,6 @@
   }
 
   function getChunkValues(val) {
-
     const emptyChunks = getEmptyArray(chunksCount);
     const newChunks = val.match(new RegExp(`.{1,${chunkLength}}`, "g"));
     if (!newChunks) return emptyChunks;
@@ -85,7 +83,8 @@
       // TODO prevent default instead of returning if it isnt right size
       //	ev.preventDefault();
       const numbers = ev.data.match(/\d/g);
-      if (!numbers || numbers.length !== chunksCount * chunkLength) invalid = true;
+      if (!numbers || numbers.length !== chunksCount * chunkLength)
+        invalid = true;
       else {
         const numbersString = numbers.join("");
         value = getChunkValues(numbersString);
@@ -94,10 +93,10 @@
       // Skip further input events for this flow
       invalid = true;
     }
-    if(onlyNumbers){
+    if (onlyNumbers) {
       const parsed = parseInt(ev.data);
       if (isNaN(parsed)) invalid = true;
-    }  
+    }
     if ((sanitizedValue[idx] + ev.data).length > chunkLength) {
       if (!invalid) {
         // Check if this is not last one
@@ -193,10 +192,10 @@
       <Chunk
         bind:inputElement={chunkInputs[getIndexWithoutSeparators(i)]}
         value={chunkValue}
-        pattern={createPattern(onlyNumbers,chunkLength)}
+        pattern={createPattern(onlyNumbers, chunkLength)}
         disabled={isDisabled(getIndexWithoutSeparators(i), ChunksFilledCount)}
         class={inputClass}
-				containerClass ={inputContainerClass}
+        containerClass={inputContainerClass}
         on:beforeinput={(ev) =>
           beforeChunkChanged(ev, getIndexWithoutSeparators(i))}
         on:originalInput={({ detail: ev }) =>
