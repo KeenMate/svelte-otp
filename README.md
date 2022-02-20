@@ -7,5 +7,4 @@ Component for inputing one time passwords (commonly use to confirm sms). You can
   - change separator
   - automatically move to next checkbox if you write on delete
   - moving with arrows
-
-developed by KEEN|MATE
+  - add classes to every element
