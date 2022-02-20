@@ -1,46 +1,50 @@
 ﻿<script>
   import { createEventDispatcher, tick } from "svelte";
-  import TextField from "./TextField.svelte";
+  import Chunk from "./Chunk.svelte";
   const dispatch = createEventDispatcher();
-  const Separator = '-';
+  export const Separator = '-';
+  //value is array of values
   export let value;
+  export let valueWithSeparators;
   export let onlyNumbers = true;
-  // Not reactive
-  export let chunks = 3;
+  export let chunksCount = 3;
   export let chunkLength = 3;
 
-  let pattern;
-  $: pattern = createPattern(onlyNumbers,chunkLength)
+	//styles
+  export let inputClass = "otp-default-input"
+  export let inputContainerClass = ""
+  export let containerClass= "one-time-pass"
+  export let separatorCLass = ""
 
+  $: valueWithSeparators = value?.join(Separator)
   let chunkInputs = [];
-  $: sanitizedValue = sanitizeValue(value);
+  $: sanitizedValue = sanitizeValue(value,chunksCount);
   $: sanitizedValueWithSeparators = zipWithSeparators(sanitizedValue);
-  $: chunksFilled = getChunksFilledCount(sanitizedValue);
+  $: ChunksFilledCount = getChunksFilledCount(sanitizedValue);
   $: chunksFilledChanged(sanitizedValue);
 
   function createPattern(numbers,length) {
-    console.log((numbers?  "[0-9]":".") + "{"+ length + "}")
     return (numbers?  "[0-9]":".") + "{"+ length + "}"
     }
 
 
-  function zipWithSeparators(chunks) {
+  function zipWithSeparators(chunks,chunksCunt) {
     return chunks.flatMap((c) => [Separator, c]).slice(1);
   }
 
   function sanitizeValue(value) {
-    if (value && value instanceof Array && value.length === chunks)
+    if (value && value instanceof Array && value.length === chunksCount)
       return value;
     if (typeof value === "string" && value.length) return getChunkValues(value);
-    return getEmptyArray(chunks);
+    return getEmptyArray(chunksCount);
   }
 
   function getChunkValues(val) {
 
-    const emptyChunks = getEmptyArray(chunks);
+    const emptyChunks = getEmptyArray(chunksCount);
     const newChunks = val.match(new RegExp(`.{1,${chunkLength}}`, "g"));
     if (!newChunks) return emptyChunks;
-    if (newChunks.length === chunks) return newChunks;
+    if (newChunks.length === chunksCount) return newChunks;
     return emptyChunks.map((x, i) => newChunks[i] || x);
   }
 
@@ -69,7 +73,6 @@
   }
 
   function beforeChunkChanged(ev, idx) {
-    console.log(ev.data)
     let invalid = false;
     if (ev.data === null) {
       if (sanitizedValue[idx].length === 1)
@@ -82,7 +85,7 @@
       // TODO prevent default instead of returning if it isnt right size
       //	ev.preventDefault();
       const numbers = ev.data.match(/\d/g);
-      if (!numbers || numbers.length !== chunks * chunkLength) invalid = true;
+      if (!numbers || numbers.length !== chunksCount * chunkLength) invalid = true;
       else {
         const numbersString = numbers.join("");
         value = getChunkValues(numbersString);
@@ -91,7 +94,6 @@
       // Skip further input events for this flow
       invalid = true;
     }
-    console.log(ev.data)
     if(onlyNumbers){
       const parsed = parseInt(ev.data);
       if (isNaN(parsed)) invalid = true;
@@ -117,7 +119,6 @@
 
   function keystroke(ev, idx) {
     // 37: left 39: right
-    console.log(ev);
 
     if (ev.keyCode == 39) {
       //only moves if you are on end of text
@@ -149,7 +150,6 @@
   }
 
   function chunkChanged(ev, idx) {
-    console.log(ev.data)
     value = getUpdatedChunks(sanitizedValue, getValueFromEvent(ev), idx);
     dispatch("change", value);
   }
@@ -185,16 +185,18 @@
   }
 </script>
 
-<div class="one-time-pass mb-4">
+<div class={containerClass}>
   {#each sanitizedValueWithSeparators as chunkValue, i}
     {#if chunkValue === Separator}
-      <span class="separator">-</span>
+      <span class={separatorCLass}>-</span>
     {:else}
-      <TextField
+      <Chunk
         bind:inputElement={chunkInputs[getIndexWithoutSeparators(i)]}
         value={chunkValue}
-        {pattern}
-        disabled={isDisabled(getIndexWithoutSeparators(i), chunksFilled)}
+        pattern={createPattern(onlyNumbers,chunkLength)}
+        disabled={isDisabled(getIndexWithoutSeparators(i), ChunksFilledCount)}
+        class={inputClass}
+				containerClass ={inputContainerClass}
         on:beforeinput={(ev) =>
           beforeChunkChanged(ev, getIndexWithoutSeparators(i))}
         on:originalInput={({ detail: ev }) =>
@@ -206,6 +208,7 @@
 </div>
 
 <style lang="sass">
+:global
 	.one-time-pass
 		display: flex
 		gap: 1rem
@@ -216,4 +219,14 @@
 				width: 3.5rem
 				input
 					text-align: center
+	.otp-default-input
+		width: 100%
+		padding: 8px 12px
+		margin: 8px 0
+		display: inline-block
+		border: 1px solid #ccc
+		border-radius: 4px
+		box-sizing: border-box
+
+
 </style>
