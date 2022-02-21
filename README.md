@@ -14,12 +14,12 @@ Component for inputing one time passwords (commonly use to confirm sms). You can
   -  value(default: [])
   -  valueWithSeparators(default: "" )
   -  onlyNumbers(default: true)
-	-  chunksCount(default: 3)
-	-  chunkLength(default: 3)
-	-  inputClass(default: "otp-default-input")
-	-  inputContainerClass(default: "")
-	-  containerClass(default: "one-time-pass")
-	-  separatorCLass(default: "")
+  -  chunksCount(default: 3)
+  -  chunkLength(default: 3)
+  -  inputClass(default: "otp-default-input")
+  -  inputContainerClass(default: "")
+  -  containerClass(default: "one-time-pass")
+  -  separatorCLass(default: "")
 
 
 ## Example
