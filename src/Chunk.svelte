@@ -10,10 +10,6 @@
 	export let type = "text";
 	export let disabled = false;
 
-	export function getInputElement() {
-		return inputElement;
-	}
-
 	const dispatch = createEventDispatcher();
 
 	function onInput(ev) {

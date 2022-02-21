@@ -1,5 +1,5 @@
 <script>
-  import OneTimePass from "./OneTimePass.svelte";
+  import OneTimePass from "../../src/OneTimePass.svelte";
   let value, onlyNumbers, chunksCount, chunkLength, valueWithSeparators;
 </script>
 
