@@ -10,8 +10,8 @@ Component for inputing one time passwords (commonly use to confirm sms). You can
   - add classes to every element
 
 ## Props
-	-  separator(default: "-") 
-	-  value(default: [])
+  -  separator(default: "-") 
+  -  value(default: [])
   -  valueWithSeparators(default: "" )
   -  onlyNumbers(default: true)
 	-  chunksCount(default: 3)
