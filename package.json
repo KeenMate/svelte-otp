@@ -9,6 +9,10 @@
 	"main": "src/index.js",
 	"module": "dist/index.mjs",
 	"svelte": "src/index.js",
+	"files": [
+    "src",
+    "dist"
+  ],
 	"scripts": {
 		"build": "npx rollup -c",
 		"dev": "rollup -c dev.rollup.config.js -w",
