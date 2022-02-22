@@ -10,8 +10,8 @@
 	"module": "dist/index.mjs",
 	"svelte": "src/index.js",
 	"scripts": {
-    "build": "npx rollup -c",
-    "dev": "rollup -c dev.rollup.config.js -w",
+		"build": "npx rollup -c",
+		"dev": "rollup -c dev.rollup.config.js -w",
 		"start": "sirv dev --no-clear"
 	},
 	"devDependencies": {
@@ -23,10 +23,12 @@
 		"rollup-plugin-svelte": "^7.0.0",
 		"rollup-plugin-terser": "^7.0.0",
 		"svelte": "^3.0.0",
-		"sass": "^1.49.0",
 		"rollup-plugin-postcss": "^4.0.2",
 		"sirv-cli": "^2.0.0",
 		"svelte-preprocess": "^4.10.3"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"rollup-plugin-postcss": "^4.0.2",
+		"sass": "^1.49.0"
+	}
 }
