@@ -2,3 +2,6 @@
 /dev/build/
 
 .DS_Store
+dev/build/bundle.css
+dev/build/bundle.js
+dev/build/bundle.js.map
