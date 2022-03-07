@@ -15,6 +15,7 @@
 	export let inputContainerClass = "otp-default-field";
 	export let containerClass = "one-time-pass";
 	export let separatorCLass = "";
+	export let IsComplete = false;
 
 	$: valueWithSeparators = value?.join(Separator);
 	let chunkInputs = [];
@@ -23,6 +24,9 @@
 	$: sanitizedValueWithSeparators = zipWithSeparators(sanitizedValue);
 	$: ChunksFilledCount = getChunksFilledCount(sanitizedValue);
 	$: chunksFilledChanged(sanitizedValue);
+
+	$: IsComplete = (valueWithSeparators?.length == chunksCount * (chunkLength + 1) - 1 ) || false;
+
 
 	function createPattern(numbers, length) {
 		return (numbers ? "[0-9]" : ".") + "{" + length + "}";

@@ -1,6 +1,6 @@
 <script>
   import OneTimePass from "../../src/OneTimePass.svelte";
-  let value, onlyNumbers, chunksCount, chunkLength, valueWithSeparators;
+  let value, onlyNumbers, chunksCount, chunkLength, valueWithSeparators, completed;
 </script>
 
 <main>
@@ -12,6 +12,7 @@
     bind:chunksCount
     {chunkLength}
     bind:valueWithSeparators
+		bind:IsComplete={completed}
   />
 </main>
 
@@ -27,6 +28,7 @@
   </div>
   <div>chunks: <input type="number" bind:value={chunksCount} /></div>
   <div>chunkLength: <input type="number" bind:value={chunkLength} /></div>
+	<div>IsComplete: {completed} </div>
   <br />
   <b>+ styling props </b>
   <ul>
@@ -35,4 +37,5 @@
     <li>containerClass</li>
     <li>separatorCLass</li>
   </ul>
+
 </div>

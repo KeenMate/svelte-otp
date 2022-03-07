@@ -757,44 +757,44 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[28] = list[i];
-    	child_ctx[29] = list;
-    	child_ctx[30] = i;
+    	child_ctx[29] = list[i];
+    	child_ctx[30] = list;
+    	child_ctx[31] = i;
     	return child_ctx;
     }
 
-    // (189:2) {:else}
+    // (193:2) {:else}
     function create_else_block(ctx) {
     	let chunk;
     	let updating_inputElement;
     	let current;
 
     	function chunk_inputElement_binding(value) {
-    		/*chunk_inputElement_binding*/ ctx[18](value, /*i*/ ctx[30]);
+    		/*chunk_inputElement_binding*/ ctx[19](value, /*i*/ ctx[31]);
     	}
 
     	function beforeinput_handler(...args) {
-    		return /*beforeinput_handler*/ ctx[19](/*i*/ ctx[30], ...args);
+    		return /*beforeinput_handler*/ ctx[20](/*i*/ ctx[31], ...args);
     	}
 
     	function originalInput_handler(...args) {
-    		return /*originalInput_handler*/ ctx[20](/*i*/ ctx[30], ...args);
+    		return /*originalInput_handler*/ ctx[21](/*i*/ ctx[31], ...args);
     	}
 
     	function keydown_handler(...args) {
-    		return /*keydown_handler*/ ctx[21](/*i*/ ctx[30], ...args);
+    		return /*keydown_handler*/ ctx[22](/*i*/ ctx[31], ...args);
     	}
 
     	let chunk_props = {
-    		value: /*chunkValue*/ ctx[28],
+    		value: /*chunkValue*/ ctx[29],
     		pattern: createPattern(/*onlyNumbers*/ ctx[1], /*chunkLength*/ ctx[2]),
-    		disabled: /*isDisabled*/ ctx[13](/*i*/ ctx[30] / 2, /*ChunksFilledCount*/ ctx[8]),
+    		disabled: /*isDisabled*/ ctx[13](/*i*/ ctx[31] / 2, /*ChunksFilledCount*/ ctx[8]),
     		class: /*inputClass*/ ctx[3],
     		containerClass: /*inputContainerClass*/ ctx[4]
     	};
 
-    	if (/*chunkInputs*/ ctx[7][/*i*/ ctx[30] / 2] !== void 0) {
-    		chunk_props.inputElement = /*chunkInputs*/ ctx[7][/*i*/ ctx[30] / 2];
+    	if (/*chunkInputs*/ ctx[7][/*i*/ ctx[31] / 2] !== void 0) {
+    		chunk_props.inputElement = /*chunkInputs*/ ctx[7][/*i*/ ctx[31] / 2];
     	}
 
     	chunk = new Chunk({ props: chunk_props, $$inline: true });
@@ -814,15 +814,15 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
     			const chunk_changes = {};
-    			if (dirty & /*sanitizedValueWithSeparators*/ 512) chunk_changes.value = /*chunkValue*/ ctx[28];
-    			if (dirty & /*onlyNumbers, chunkLength*/ 6) chunk_changes.pattern = createPattern(/*onlyNumbers*/ ctx[1], /*chunkLength*/ ctx[2]);
-    			if (dirty & /*ChunksFilledCount*/ 256) chunk_changes.disabled = /*isDisabled*/ ctx[13](/*i*/ ctx[30] / 2, /*ChunksFilledCount*/ ctx[8]);
-    			if (dirty & /*inputClass*/ 8) chunk_changes.class = /*inputClass*/ ctx[3];
-    			if (dirty & /*inputContainerClass*/ 16) chunk_changes.containerClass = /*inputContainerClass*/ ctx[4];
+    			if (dirty[0] & /*sanitizedValueWithSeparators*/ 512) chunk_changes.value = /*chunkValue*/ ctx[29];
+    			if (dirty[0] & /*onlyNumbers, chunkLength*/ 6) chunk_changes.pattern = createPattern(/*onlyNumbers*/ ctx[1], /*chunkLength*/ ctx[2]);
+    			if (dirty[0] & /*ChunksFilledCount*/ 256) chunk_changes.disabled = /*isDisabled*/ ctx[13](/*i*/ ctx[31] / 2, /*ChunksFilledCount*/ ctx[8]);
+    			if (dirty[0] & /*inputClass*/ 8) chunk_changes.class = /*inputClass*/ ctx[3];
+    			if (dirty[0] & /*inputContainerClass*/ 16) chunk_changes.containerClass = /*inputContainerClass*/ ctx[4];
 
-    			if (!updating_inputElement && dirty & /*chunkInputs*/ 128) {
+    			if (!updating_inputElement && dirty[0] & /*chunkInputs*/ 128) {
     				updating_inputElement = true;
-    				chunk_changes.inputElement = /*chunkInputs*/ ctx[7][/*i*/ ctx[30] / 2];
+    				chunk_changes.inputElement = /*chunkInputs*/ ctx[7][/*i*/ ctx[31] / 2];
     				add_flush_callback(() => updating_inputElement = false);
     			}
 
@@ -846,14 +846,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(189:2) {:else}",
+    		source: "(193:2) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (187:2) {#if chunkValue === Separator}
+    // (191:2) {#if chunkValue === Separator}
     function create_if_block(ctx) {
     	let span;
     	let t;
@@ -863,14 +863,14 @@ var app = (function () {
     			span = element("span");
     			t = text("-");
     			attr_dev(span, "class", /*separatorCLass*/ ctx[6]);
-    			add_location(span, file$1, 187, 3, 5423);
+    			add_location(span, file$1, 191, 3, 5558);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
     			append_dev(span, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*separatorCLass*/ 64) {
+    			if (dirty[0] & /*separatorCLass*/ 64) {
     				attr_dev(span, "class", /*separatorCLass*/ ctx[6]);
     			}
     		},
@@ -885,14 +885,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(187:2) {#if chunkValue === Separator}",
+    		source: "(191:2) {#if chunkValue === Separator}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (186:1) {#each sanitizedValueWithSeparators as chunkValue, i}
+    // (190:1) {#each sanitizedValueWithSeparators as chunkValue, i}
     function create_each_block(ctx) {
     	let current_block_type_index;
     	let if_block;
@@ -902,7 +902,7 @@ var app = (function () {
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*chunkValue*/ ctx[28] === /*Separator*/ ctx[0]) return 0;
+    		if (/*chunkValue*/ ctx[29] === /*Separator*/ ctx[0]) return 0;
     		return 1;
     	}
 
@@ -965,7 +965,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(186:1) {#each sanitizedValueWithSeparators as chunkValue, i}",
+    		source: "(190:1) {#each sanitizedValueWithSeparators as chunkValue, i}",
     		ctx
     	});
 
@@ -998,7 +998,7 @@ var app = (function () {
     			}
 
     			attr_dev(div, "class", /*containerClass*/ ctx[5]);
-    			add_location(div, file$1, 184, 0, 5300);
+    			add_location(div, file$1, 188, 0, 5435);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1013,8 +1013,8 @@ var app = (function () {
 
     			current = true;
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (dirty & /*separatorCLass, sanitizedValueWithSeparators, Separator, createPattern, onlyNumbers, chunkLength, isDisabled, ChunksFilledCount, inputClass, inputContainerClass, chunkInputs, beforeChunkChanged, chunkChanged, keystroke*/ 16351) {
+    		p: function update(ctx, dirty) {
+    			if (dirty[0] & /*separatorCLass, sanitizedValueWithSeparators, Separator, onlyNumbers, chunkLength, isDisabled, ChunksFilledCount, inputClass, inputContainerClass, chunkInputs, beforeChunkChanged, chunkChanged, keystroke*/ 16351) {
     				each_value = /*sanitizedValueWithSeparators*/ ctx[9];
     				validate_each_argument(each_value);
     				let i;
@@ -1042,7 +1042,7 @@ var app = (function () {
     				check_outros();
     			}
 
-    			if (!current || dirty & /*containerClass*/ 32) {
+    			if (!current || dirty[0] & /*containerClass*/ 32) {
     				attr_dev(div, "class", /*containerClass*/ ctx[5]);
     			}
     		},
@@ -1127,6 +1127,7 @@ var app = (function () {
     	let { inputContainerClass = "otp-default-field" } = $$props;
     	let { containerClass = "one-time-pass" } = $$props;
     	let { separatorCLass = "" } = $$props;
+    	let { IsComplete = false } = $$props;
     	let chunkInputs = [];
 
     	function zipWithSeparators(chunks, chunksCunt) {
@@ -1261,7 +1262,8 @@ var app = (function () {
     		'inputClass',
     		'inputContainerClass',
     		'containerClass',
-    		'separatorCLass'
+    		'separatorCLass',
+    		'IsComplete'
     	];
 
     	Object.keys($$props).forEach(key => {
@@ -1283,12 +1285,13 @@ var app = (function () {
     		if ('value' in $$props) $$invalidate(14, value = $$props.value);
     		if ('valueWithSeparators' in $$props) $$invalidate(15, valueWithSeparators = $$props.valueWithSeparators);
     		if ('onlyNumbers' in $$props) $$invalidate(1, onlyNumbers = $$props.onlyNumbers);
-    		if ('chunksCount' in $$props) $$invalidate(16, chunksCount = $$props.chunksCount);
+    		if ('chunksCount' in $$props) $$invalidate(17, chunksCount = $$props.chunksCount);
     		if ('chunkLength' in $$props) $$invalidate(2, chunkLength = $$props.chunkLength);
     		if ('inputClass' in $$props) $$invalidate(3, inputClass = $$props.inputClass);
     		if ('inputContainerClass' in $$props) $$invalidate(4, inputContainerClass = $$props.inputContainerClass);
     		if ('containerClass' in $$props) $$invalidate(5, containerClass = $$props.containerClass);
     		if ('separatorCLass' in $$props) $$invalidate(6, separatorCLass = $$props.separatorCLass);
+    		if ('IsComplete' in $$props) $$invalidate(16, IsComplete = $$props.IsComplete);
     	};
 
     	$$self.$capture_state = () => ({
@@ -1306,6 +1309,7 @@ var app = (function () {
     		inputContainerClass,
     		containerClass,
     		separatorCLass,
+    		IsComplete,
     		chunkInputs,
     		createPattern,
     		zipWithSeparators,
@@ -1330,14 +1334,15 @@ var app = (function () {
     		if ('value' in $$props) $$invalidate(14, value = $$props.value);
     		if ('valueWithSeparators' in $$props) $$invalidate(15, valueWithSeparators = $$props.valueWithSeparators);
     		if ('onlyNumbers' in $$props) $$invalidate(1, onlyNumbers = $$props.onlyNumbers);
-    		if ('chunksCount' in $$props) $$invalidate(16, chunksCount = $$props.chunksCount);
+    		if ('chunksCount' in $$props) $$invalidate(17, chunksCount = $$props.chunksCount);
     		if ('chunkLength' in $$props) $$invalidate(2, chunkLength = $$props.chunkLength);
     		if ('inputClass' in $$props) $$invalidate(3, inputClass = $$props.inputClass);
     		if ('inputContainerClass' in $$props) $$invalidate(4, inputContainerClass = $$props.inputContainerClass);
     		if ('containerClass' in $$props) $$invalidate(5, containerClass = $$props.containerClass);
     		if ('separatorCLass' in $$props) $$invalidate(6, separatorCLass = $$props.separatorCLass);
+    		if ('IsComplete' in $$props) $$invalidate(16, IsComplete = $$props.IsComplete);
     		if ('chunkInputs' in $$props) $$invalidate(7, chunkInputs = $$props.chunkInputs);
-    		if ('sanitizedValue' in $$props) $$invalidate(17, sanitizedValue = $$props.sanitizedValue);
+    		if ('sanitizedValue' in $$props) $$invalidate(18, sanitizedValue = $$props.sanitizedValue);
     		if ('ChunksFilledCount' in $$props) $$invalidate(8, ChunksFilledCount = $$props.ChunksFilledCount);
     		if ('sanitizedValueWithSeparators' in $$props) $$invalidate(9, sanitizedValueWithSeparators = $$props.sanitizedValueWithSeparators);
     	};
@@ -1347,24 +1352,28 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*value*/ 16384) {
+    		if ($$self.$$.dirty[0] & /*value*/ 16384) {
     			$$invalidate(15, valueWithSeparators = value?.join(Separator));
     		}
 
-    		if ($$self.$$.dirty & /*value, chunksCount*/ 81920) {
-    			$$invalidate(17, sanitizedValue = sanitizeValue(value));
+    		if ($$self.$$.dirty[0] & /*value, chunksCount*/ 147456) {
+    			$$invalidate(18, sanitizedValue = sanitizeValue(value));
     		}
 
-    		if ($$self.$$.dirty & /*sanitizedValue*/ 131072) {
+    		if ($$self.$$.dirty[0] & /*sanitizedValue*/ 262144) {
     			$$invalidate(9, sanitizedValueWithSeparators = zipWithSeparators(sanitizedValue));
     		}
 
-    		if ($$self.$$.dirty & /*sanitizedValue*/ 131072) {
+    		if ($$self.$$.dirty[0] & /*sanitizedValue*/ 262144) {
     			$$invalidate(8, ChunksFilledCount = getChunksFilledCount(sanitizedValue));
     		}
 
-    		if ($$self.$$.dirty & /*sanitizedValue*/ 131072) {
+    		if ($$self.$$.dirty[0] & /*sanitizedValue*/ 262144) {
     			chunksFilledChanged(sanitizedValue);
+    		}
+
+    		if ($$self.$$.dirty[0] & /*valueWithSeparators, chunksCount, chunkLength*/ 163844) {
+    			$$invalidate(16, IsComplete = valueWithSeparators?.length == chunksCount * (chunkLength + 1) - 1 || false);
     		}
     	};
 
@@ -1385,6 +1394,7 @@ var app = (function () {
     		isDisabled,
     		value,
     		valueWithSeparators,
+    		IsComplete,
     		chunksCount,
     		sanitizedValue,
     		chunk_inputElement_binding,
@@ -1398,18 +1408,28 @@ var app = (function () {
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {
-    			Separator: 0,
-    			value: 14,
-    			valueWithSeparators: 15,
-    			onlyNumbers: 1,
-    			chunksCount: 16,
-    			chunkLength: 2,
-    			inputClass: 3,
-    			inputContainerClass: 4,
-    			containerClass: 5,
-    			separatorCLass: 6
-    		});
+    		init(
+    			this,
+    			options,
+    			instance$1,
+    			create_fragment$1,
+    			safe_not_equal,
+    			{
+    				Separator: 0,
+    				value: 14,
+    				valueWithSeparators: 15,
+    				onlyNumbers: 1,
+    				chunksCount: 17,
+    				chunkLength: 2,
+    				inputClass: 3,
+    				inputContainerClass: 4,
+    				containerClass: 5,
+    				separatorCLass: 6,
+    				IsComplete: 16
+    			},
+    			null,
+    			[-1, -1]
+    		);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -1509,6 +1529,14 @@ var app = (function () {
     	set separatorCLass(value) {
     		throw new Error("<OneTimePass>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
+
+    	get IsComplete() {
+    		throw new Error("<OneTimePass>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set IsComplete(value) {
+    		throw new Error("<OneTimePass>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     /* dev\src\App.svelte generated by Svelte v3.46.4 */
@@ -1525,8 +1553,9 @@ var app = (function () {
     	let updating_onlyNumbers;
     	let updating_chunksCount;
     	let updating_valueWithSeparators;
+    	let updating_IsComplete;
     	let t3;
-    	let div4;
+    	let div5;
     	let h11;
     	let t5;
     	let div0;
@@ -1548,36 +1577,44 @@ var app = (function () {
     	let t14;
     	let input3;
     	let t15;
-    	let br;
+    	let div4;
     	let t16;
-    	let b;
+    	let t17;
     	let t18;
+    	let br;
+    	let t19;
+    	let b;
+    	let t21;
     	let ul;
     	let li0;
-    	let t20;
+    	let t23;
     	let li1;
-    	let t22;
+    	let t25;
     	let li2;
-    	let t24;
+    	let t27;
     	let li3;
     	let current;
     	let mounted;
     	let dispose;
 
     	function onetimepass_value_binding(value) {
-    		/*onetimepass_value_binding*/ ctx[5](value);
+    		/*onetimepass_value_binding*/ ctx[6](value);
     	}
 
     	function onetimepass_onlyNumbers_binding(value) {
-    		/*onetimepass_onlyNumbers_binding*/ ctx[6](value);
+    		/*onetimepass_onlyNumbers_binding*/ ctx[7](value);
     	}
 
     	function onetimepass_chunksCount_binding(value) {
-    		/*onetimepass_chunksCount_binding*/ ctx[7](value);
+    		/*onetimepass_chunksCount_binding*/ ctx[8](value);
     	}
 
     	function onetimepass_valueWithSeparators_binding(value) {
-    		/*onetimepass_valueWithSeparators_binding*/ ctx[8](value);
+    		/*onetimepass_valueWithSeparators_binding*/ ctx[9](value);
+    	}
+
+    	function onetimepass_IsComplete_binding(value) {
+    		/*onetimepass_IsComplete_binding*/ ctx[10](value);
     	}
 
     	let onetimepass_props = { chunkLength: /*chunkLength*/ ctx[3] };
@@ -1598,11 +1635,16 @@ var app = (function () {
     		onetimepass_props.valueWithSeparators = /*valueWithSeparators*/ ctx[4];
     	}
 
+    	if (/*completed*/ ctx[5] !== void 0) {
+    		onetimepass_props.IsComplete = /*completed*/ ctx[5];
+    	}
+
     	onetimepass = new OneTimePass({ props: onetimepass_props, $$inline: true });
     	binding_callbacks.push(() => bind(onetimepass, 'value', onetimepass_value_binding));
     	binding_callbacks.push(() => bind(onetimepass, 'onlyNumbers', onetimepass_onlyNumbers_binding));
     	binding_callbacks.push(() => bind(onetimepass, 'chunksCount', onetimepass_chunksCount_binding));
     	binding_callbacks.push(() => bind(onetimepass, 'valueWithSeparators', onetimepass_valueWithSeparators_binding));
+    	binding_callbacks.push(() => bind(onetimepass, 'IsComplete', onetimepass_IsComplete_binding));
 
     	const block = {
     		c: function create() {
@@ -1614,7 +1656,7 @@ var app = (function () {
     			t2 = space();
     			create_component(onetimepass.$$.fragment);
     			t3 = space();
-    			div4 = element("div");
+    			div5 = element("div");
     			h11 = element("h1");
     			h11.textContent = "Options";
     			t5 = space();
@@ -1636,47 +1678,52 @@ var app = (function () {
     			t14 = text("chunkLength: ");
     			input3 = element("input");
     			t15 = space();
+    			div4 = element("div");
+    			t16 = text("IsComplete: ");
+    			t17 = text(/*completed*/ ctx[5]);
+    			t18 = space();
     			br = element("br");
-    			t16 = space();
+    			t19 = space();
     			b = element("b");
     			b.textContent = "+ styling props";
-    			t18 = space();
+    			t21 = space();
     			ul = element("ul");
     			li0 = element("li");
     			li0.textContent = "inputClass";
-    			t20 = space();
+    			t23 = space();
     			li1 = element("li");
     			li1.textContent = "inputContainerClass";
-    			t22 = space();
+    			t25 = space();
     			li2 = element("li");
     			li2.textContent = "containerClass";
-    			t24 = space();
+    			t27 = space();
     			li3 = element("li");
     			li3.textContent = "separatorCLass";
-    			add_location(h10, file, 6, 2, 166);
-    			add_location(p, file, 7, 2, 194);
-    			add_location(main, file, 5, 0, 156);
-    			add_location(h11, file, 18, 2, 352);
+    			add_location(h10, file, 6, 2, 177);
+    			add_location(p, file, 7, 2, 205);
+    			add_location(main, file, 5, 0, 167);
+    			add_location(h11, file, 19, 2, 394);
     			attr_dev(input0, "type", "checkbox");
-    			add_location(input0, file, 20, 16, 395);
-    			add_location(div0, file, 19, 2, 372);
+    			add_location(input0, file, 21, 16, 437);
+    			add_location(div0, file, 20, 2, 414);
     			attr_dev(input1, "type", "text");
-    			add_location(input1, file, 23, 11, 479);
-    			add_location(div1, file, 22, 2, 461);
+    			add_location(input1, file, 24, 11, 521);
+    			add_location(div1, file, 23, 2, 503);
     			attr_dev(input2, "type", "number");
-    			add_location(input2, file, 27, 15, 601);
-    			add_location(div2, file, 27, 2, 588);
+    			add_location(input2, file, 28, 15, 643);
+    			add_location(div2, file, 28, 2, 630);
     			attr_dev(input3, "type", "number");
-    			add_location(input3, file, 28, 20, 677);
-    			add_location(div3, file, 28, 2, 659);
-    			add_location(br, file, 29, 2, 735);
-    			add_location(b, file, 30, 2, 745);
-    			add_location(li0, file, 32, 4, 782);
-    			add_location(li1, file, 33, 4, 807);
-    			add_location(li2, file, 34, 4, 841);
-    			add_location(li3, file, 35, 4, 870);
-    			add_location(ul, file, 31, 2, 772);
-    			add_location(div4, file, 17, 0, 343);
+    			add_location(input3, file, 29, 20, 719);
+    			add_location(div3, file, 29, 2, 701);
+    			add_location(div4, file, 30, 1, 776);
+    			add_location(br, file, 31, 2, 815);
+    			add_location(b, file, 32, 2, 825);
+    			add_location(li0, file, 34, 4, 862);
+    			add_location(li1, file, 35, 4, 887);
+    			add_location(li2, file, 36, 4, 921);
+    			add_location(li3, file, 37, 4, 950);
+    			add_location(ul, file, 33, 2, 852);
+    			add_location(div5, file, 18, 0, 385);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1689,51 +1736,55 @@ var app = (function () {
     			append_dev(main, t2);
     			mount_component(onetimepass, main, null);
     			insert_dev(target, t3, anchor);
-    			insert_dev(target, div4, anchor);
-    			append_dev(div4, h11);
-    			append_dev(div4, t5);
-    			append_dev(div4, div0);
+    			insert_dev(target, div5, anchor);
+    			append_dev(div5, h11);
+    			append_dev(div5, t5);
+    			append_dev(div5, div0);
     			append_dev(div0, t6);
     			append_dev(div0, input0);
     			input0.checked = /*onlyNumbers*/ ctx[1];
-    			append_dev(div4, t7);
-    			append_dev(div4, div1);
+    			append_dev(div5, t7);
+    			append_dev(div5, div1);
     			append_dev(div1, t8);
     			append_dev(div1, input1);
     			set_input_value(input1, /*valueWithSeparators*/ ctx[4]);
     			append_dev(div1, t9);
     			append_dev(div1, t10);
-    			append_dev(div4, t11);
-    			append_dev(div4, div2);
+    			append_dev(div5, t11);
+    			append_dev(div5, div2);
     			append_dev(div2, t12);
     			append_dev(div2, input2);
     			set_input_value(input2, /*chunksCount*/ ctx[2]);
-    			append_dev(div4, t13);
-    			append_dev(div4, div3);
+    			append_dev(div5, t13);
+    			append_dev(div5, div3);
     			append_dev(div3, t14);
     			append_dev(div3, input3);
     			set_input_value(input3, /*chunkLength*/ ctx[3]);
-    			append_dev(div4, t15);
-    			append_dev(div4, br);
+    			append_dev(div5, t15);
+    			append_dev(div5, div4);
     			append_dev(div4, t16);
-    			append_dev(div4, b);
-    			append_dev(div4, t18);
-    			append_dev(div4, ul);
+    			append_dev(div4, t17);
+    			append_dev(div5, t18);
+    			append_dev(div5, br);
+    			append_dev(div5, t19);
+    			append_dev(div5, b);
+    			append_dev(div5, t21);
+    			append_dev(div5, ul);
     			append_dev(ul, li0);
-    			append_dev(ul, t20);
+    			append_dev(ul, t23);
     			append_dev(ul, li1);
-    			append_dev(ul, t22);
+    			append_dev(ul, t25);
     			append_dev(ul, li2);
-    			append_dev(ul, t24);
+    			append_dev(ul, t27);
     			append_dev(ul, li3);
     			current = true;
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input0, "change", /*input0_change_handler*/ ctx[9]),
-    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[10]),
-    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[11]),
-    					listen_dev(input3, "input", /*input3_input_handler*/ ctx[12])
+    					listen_dev(input0, "change", /*input0_change_handler*/ ctx[11]),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[12]),
+    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[13]),
+    					listen_dev(input3, "input", /*input3_input_handler*/ ctx[14])
     				];
 
     				mounted = true;
@@ -1767,6 +1818,12 @@ var app = (function () {
     				add_flush_callback(() => updating_valueWithSeparators = false);
     			}
 
+    			if (!updating_IsComplete && dirty & /*completed*/ 32) {
+    				updating_IsComplete = true;
+    				onetimepass_changes.IsComplete = /*completed*/ ctx[5];
+    				add_flush_callback(() => updating_IsComplete = false);
+    			}
+
     			onetimepass.$set(onetimepass_changes);
 
     			if (dirty & /*onlyNumbers*/ 2) {
@@ -1786,6 +1843,8 @@ var app = (function () {
     			if (dirty & /*chunkLength*/ 8 && to_number(input3.value) !== /*chunkLength*/ ctx[3]) {
     				set_input_value(input3, /*chunkLength*/ ctx[3]);
     			}
+
+    			if (!current || dirty & /*completed*/ 32) set_data_dev(t17, /*completed*/ ctx[5]);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -1800,7 +1859,7 @@ var app = (function () {
     			if (detaching) detach_dev(main);
     			destroy_component(onetimepass);
     			if (detaching) detach_dev(t3);
-    			if (detaching) detach_dev(div4);
+    			if (detaching) detach_dev(div5);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -1820,7 +1879,7 @@ var app = (function () {
     function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
-    	let value, onlyNumbers, chunksCount, chunkLength, valueWithSeparators;
+    	let value, onlyNumbers, chunksCount, chunkLength, valueWithSeparators, completed;
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -1845,6 +1904,11 @@ var app = (function () {
     	function onetimepass_valueWithSeparators_binding(value) {
     		valueWithSeparators = value;
     		$$invalidate(4, valueWithSeparators);
+    	}
+
+    	function onetimepass_IsComplete_binding(value) {
+    		completed = value;
+    		$$invalidate(5, completed);
     	}
 
     	function input0_change_handler() {
@@ -1873,7 +1937,8 @@ var app = (function () {
     		onlyNumbers,
     		chunksCount,
     		chunkLength,
-    		valueWithSeparators
+    		valueWithSeparators,
+    		completed
     	});
 
     	$$self.$inject_state = $$props => {
@@ -1882,6 +1947,7 @@ var app = (function () {
     		if ('chunksCount' in $$props) $$invalidate(2, chunksCount = $$props.chunksCount);
     		if ('chunkLength' in $$props) $$invalidate(3, chunkLength = $$props.chunkLength);
     		if ('valueWithSeparators' in $$props) $$invalidate(4, valueWithSeparators = $$props.valueWithSeparators);
+    		if ('completed' in $$props) $$invalidate(5, completed = $$props.completed);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1894,10 +1960,12 @@ var app = (function () {
     		chunksCount,
     		chunkLength,
     		valueWithSeparators,
+    		completed,
     		onetimepass_value_binding,
     		onetimepass_onlyNumbers_binding,
     		onetimepass_chunksCount_binding,
     		onetimepass_valueWithSeparators_binding,
+    		onetimepass_IsComplete_binding,
     		input0_change_handler,
     		input1_input_handler,
     		input2_input_handler,
