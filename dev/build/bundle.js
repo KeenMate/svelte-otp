@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35731/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -493,14 +493,14 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			input = element("input");
-    			attr_dev(input, "class", input_class_value = "input " + (/*$$restProps*/ ctx[8].class || ''));
+    			attr_dev(input, "class", input_class_value = "" + (/*$$restProps*/ ctx[8].class || ''));
     			input.value = /*value*/ ctx[1];
     			attr_dev(input, "type", /*type*/ ctx[5]);
     			attr_dev(input, "placeholder", /*placeholder*/ ctx[3]);
     			attr_dev(input, "pattern", /*pattern*/ ctx[4]);
     			input.disabled = /*disabled*/ ctx[6];
-    			add_location(input, file$2, 24, 1, 557);
-    			attr_dev(div, "class", div_class_value = "field " + (/*$$restProps*/ ctx[8].containerClass || ''));
+    			add_location(input, file$2, 24, 1, 561);
+    			attr_dev(div, "class", div_class_value = "otp-field " + (/*$$restProps*/ ctx[8].containerClass || ''));
     			attr_dev(div, "title", /*title*/ ctx[2]);
     			add_location(div, file$2, 23, 0, 492);
     		},
@@ -524,7 +524,7 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*$$restProps*/ 256 && input_class_value !== (input_class_value = "input " + (/*$$restProps*/ ctx[8].class || ''))) {
+    			if (dirty & /*$$restProps*/ 256 && input_class_value !== (input_class_value = "" + (/*$$restProps*/ ctx[8].class || ''))) {
     				attr_dev(input, "class", input_class_value);
     			}
 
@@ -548,7 +548,7 @@ var app = (function () {
     				prop_dev(input, "disabled", /*disabled*/ ctx[6]);
     			}
 
-    			if (dirty & /*$$restProps*/ 256 && div_class_value !== (div_class_value = "field " + (/*$$restProps*/ ctx[8].containerClass || ''))) {
+    			if (dirty & /*$$restProps*/ 256 && div_class_value !== (div_class_value = "otp-field " + (/*$$restProps*/ ctx[8].containerClass || ''))) {
     				attr_dev(div, "class", div_class_value);
     			}
 
@@ -863,7 +863,7 @@ var app = (function () {
     			span = element("span");
     			t = text("-");
     			attr_dev(span, "class", /*separatorCLass*/ ctx[6]);
-    			add_location(span, file$1, 187, 3, 5406);
+    			add_location(span, file$1, 187, 3, 5423);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -998,7 +998,7 @@ var app = (function () {
     			}
 
     			attr_dev(div, "class", /*containerClass*/ ctx[5]);
-    			add_location(div, file$1, 184, 0, 5283);
+    			add_location(div, file$1, 184, 0, 5300);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1124,7 +1124,7 @@ var app = (function () {
     	let { chunksCount = 3 } = $$props;
     	let { chunkLength = 3 } = $$props;
     	let { inputClass = "otp-default-input" } = $$props;
-    	let { inputContainerClass = "" } = $$props;
+    	let { inputContainerClass = "otp-default-field" } = $$props;
     	let { containerClass = "one-time-pass" } = $$props;
     	let { separatorCLass = "" } = $$props;
     	let chunkInputs = [];

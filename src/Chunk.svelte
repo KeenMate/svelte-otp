@@ -21,10 +21,10 @@
 	}
 </script>
 
-<div class="field {$$restProps.containerClass || ''}" {title}>
+<div class="otp-field {$$restProps.containerClass || ''}" {title}>
 	<input
 		bind:this={inputElement}
-		class="input {$$restProps.class || ''}"
+		class=" {$$restProps.class ||''}"
 		{value}
 		{type}
 		{placeholder}

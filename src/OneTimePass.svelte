@@ -12,7 +12,7 @@
 
 	//styles
 	export let inputClass = "otp-default-input";
-	export let inputContainerClass = "";
+	export let inputContainerClass = "otp-default-field";
 	export let containerClass = "one-time-pass";
 	export let separatorCLass = "";
 
@@ -210,11 +210,12 @@
 		display: flex
 		gap: 1rem
 		align-items: center
-		.field
+		.otp-field
 			margin-bottom: 0 !important
-			width: 3.5rem
 			input
 				text-align: center
+		.otp-default-field
+			width: 3.5rem
 	.otp-default-input
 		width: 100%
 		padding: 8px 12px
