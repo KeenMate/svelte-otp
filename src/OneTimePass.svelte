@@ -210,12 +210,11 @@
 		display: flex
 		gap: 1rem
 		align-items: center
-		:global
-			.field
-				margin-bottom: 0 !important
-				width: 3.5rem
-				input
-					text-align: center
+		.field
+			margin-bottom: 0 !important
+			width: 3.5rem
+			input
+				text-align: center
 	.otp-default-input
 		width: 100%
 		padding: 8px 12px
