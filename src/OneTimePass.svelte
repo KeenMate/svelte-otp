@@ -5,7 +5,7 @@
 	export let Separator = "-";
 	//value is array of values
 	export let value;
-	export let valueWithSeparators;
+	export let valueWithSeparators = "";
 	export let onlyNumbers = true;
 	export let chunksCount = 3;
 	export let chunkLength = 3;
@@ -17,7 +17,7 @@
 	export let separatorCLass = "";
 	export let IsComplete = false;
 
-	$: valueWithSeparators = value?.join(Separator);
+	$: valueWithSeparators = value?.join(Separator) ?? "";
 	let chunkInputs = [];
 
 	$: sanitizedValue = sanitizeValue(value, chunksCount);
