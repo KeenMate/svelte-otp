@@ -216,6 +216,7 @@
 		display: flex
 		gap: 1rem
 		align-items: center
+		justify-content: center
 		.otp-field
 			margin-bottom: 0 !important
 			input
