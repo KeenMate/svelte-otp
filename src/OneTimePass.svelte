@@ -2,10 +2,10 @@
 	import { createEventDispatcher, tick } from "svelte";
 	import Chunk from "./Chunk.svelte";
 	const dispatch = createEventDispatcher();
-	export const Separator = "-";
+	export let Separator = "-";
 	//value is array of values
 	export let value;
-	export let valueWithSeparators = "";
+	export let valueWithSeparators;
 	export let onlyNumbers = true;
 	export let chunksCount = 3;
 	export let chunkLength = 3;
@@ -191,7 +191,7 @@
 <div class={containerClass}>
 	{#each sanitizedValueWithSeparators as chunkValue, i}
 		{#if chunkValue === Separator}
-			<span class={separatorCLass}>-</span>
+			<span class={separatorCLass}>{Separator}</span>
 		{:else}
 			<Chunk
 				bind:inputElement={chunkInputs[i/2]}
