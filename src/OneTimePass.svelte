@@ -25,7 +25,7 @@
 	$: ChunksFilledCount = getChunksFilledCount(sanitizedValue);
 	$: chunksFilledChanged(sanitizedValue);
 
-	$: IsComplete = (valueWithSeparators?.length == chunksCount * (chunkLength + 1) - 1 ) || false;
+	$: IsComplete = (valueWithSeparators?.length == chunksCount * (chunkLength + 1) - 1 ) ?? false;
 
 
 	function createPattern(numbers, length) {
@@ -48,7 +48,7 @@
 		const newChunks = val.match(new RegExp(`.{1,${chunkLength}}`, "g"));
 		if (!newChunks) return emptyChunks;
 		if (newChunks.length === chunksCount) return newChunks;
-		return emptyChunks.map((x, i) => newChunks[i] || x);
+		return emptyChunks.map((x, i) => newChunks[i] ?? x);
 	}
 
 	function getEmptyArray(length) {
@@ -71,7 +71,7 @@
 			val?.reduce(
 				(acc, x) => acc + ((x.length === chunkLength && 1) || 0),
 				0
-			) || 0
+			) ?? 0
 		);
 	}
 
@@ -86,9 +86,10 @@
 		if (!invalid && ev.data.length > 1) {
 			// Probably pasting code
 			// TODO prevent default instead of returning if it isnt right size
+			// TODO pasting only work for numbers
 			//	ev.preventDefault();
 			const numbers = ev.data.match(/\d/g);
-			if (!numbers || numbers.length !== chunksCount * chunkLength)
+			if (!numbers ?? numbers.length !== chunksCount * chunkLength)
 				invalid = true;
 			else {
 				const numbersString = numbers.join("");
@@ -102,11 +103,12 @@
 			const parsed = parseInt(ev.data);
 			if (isNaN(parsed)) invalid = true;
 		}
+
 		if ((sanitizedValue[idx] + ev.data).length > chunkLength) {
 			if (!invalid) {
 				// Check if this is not last one
 				if (chunkInputs[idx + 1]?.value.length < chunkLength) {
-					chunkInputs[idx + 1].value = parsed + chunkInputs[idx + 1].value;
+					chunkInputs[idx + 1].value = ev.data + chunkInputs[idx + 1].value;
 					tick().then(() => {
 						chunkInputs[idx + 1]?.focus();
 					});
