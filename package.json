@@ -10,9 +10,9 @@
 	"module": "dist/index.mjs",
 	"svelte": "src/index.js",
 	"files": [
-    "src",
-    "dist"
-  ],
+		"src",
+		"dist"
+	],
 	"scripts": {
 		"build": "npx rollup -c",
 		"dev": "rollup -c dev.rollup.config.js -w",
@@ -30,9 +30,8 @@
 		"rollup-plugin-postcss": "^4.0.2",
 		"sass": "^1.49.0",
 		"sirv-cli": "^2.0.0",
-		"svelte-preprocess": "^4.10.3"
+		"svelte-preprocess": "^4.10.3",
+		"postcss": "^8.4.12"
 	},
-	"dependencies": {
-
-	}
+	"dependencies": {}
 }
