@@ -1,6 +1,7 @@
 <script>
   import OneTimePass from "../../src/OneTimePass.svelte";
-  let value, onlyNumbers, chunksCount, chunkLength, valueWithSeparators, completed;
+  let value, onlyNumbers, chunksCount, chunkLength, joinedValue, completed,joinWithSeparators,separator;
+
 </script>
 
 <main>
@@ -11,8 +12,11 @@
     bind:onlyNumbers
     bind:chunksCount
     {chunkLength}
-    bind:valueWithSeparators
+    bind:joinedValue
 		bind:IsComplete={completed}
+	bind:separator
+
+		{joinWithSeparators}
   />
 </main>
 
@@ -22,12 +26,16 @@
     onlyNumbers <input type="checkbox" bind:checked={onlyNumbers} />
   </div>
   <div>
-    value: <input type="text" bind:value={valueWithSeparators} /> || {JSON.stringify(
+    joinWithSeparators <input type="checkbox" bind:checked={joinWithSeparators} />
+  </div>
+  <div>
+    value: <input type="text" bind:value={joinedValue} /> || {JSON.stringify(
       value
     )}
   </div>
   <div>chunks: <input type="number" bind:value={chunksCount} /></div>
   <div>chunkLength: <input type="number" bind:value={chunkLength} /></div>
+  <div>separator(dont change it dynamicly)<input type="text" bind:value={separator} maxlength="1" readonly/></div>
 	<div>IsComplete: {completed} </div>
   <br />
   <b>+ styling props </b>
