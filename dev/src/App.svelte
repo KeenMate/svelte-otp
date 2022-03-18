@@ -11,7 +11,7 @@
     bind:value
     bind:onlyNumbers
     bind:chunksCount
-    {chunkLength}
+    bind:chunkLength
     bind:joinedValue
 		bind:IsComplete={completed}
 	bind:separator
@@ -23,20 +23,21 @@
 <div>
   <h1>Options</h1>
   <div>
-    onlyNumbers <input type="checkbox" bind:checked={onlyNumbers} />
+    <label>onlyNumbers</label> <input type="checkbox" bind:checked={onlyNumbers} />
   </div>
   <div>
-    joinWithSeparators <input type="checkbox" bind:checked={joinWithSeparators} />
+    <label>joinWithSeparators</label> <input type="checkbox" bind:checked={joinWithSeparators} />
   </div>
   <div>
-    value: <input type="text" bind:value={joinedValue} /> || {JSON.stringify(
-      value
-    )}
+    <label>joinedValue:</label> <input type="text" bind:value={joinedValue} />
   </div>
-  <div>chunks: <input type="number" bind:value={chunksCount} /></div>
-  <div>chunkLength: <input type="number" bind:value={chunkLength} /></div>
-  <div>separator(dont change it dynamicly)<input type="text" bind:value={separator} maxlength="1" readonly/></div>
-	<div>IsComplete: {completed} </div>
+  <div>
+    <label>Value:</label>  {JSON.stringify(value)}
+  </div>
+  <div> <label>chunks:</label> <input type="number" bind:value={chunksCount} /></div>
+  <div> <label>chunkLength: </label><input type="number" bind:value={chunkLength} /></div>
+  <div> <label>separator </label><input type="text" bind:value={separator} maxlength="1" readonly/></div>
+	<div> <label>IsComplete:</label> {completed} </div>
   <br />
   <b>+ styling props </b>
   <ul>
@@ -47,3 +48,10 @@
   </ul>
 
 </div>
+
+<style>
+	div label{
+		min-width: 10em;
+		display: inline-block;
+	}
+</style>
