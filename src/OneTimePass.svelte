@@ -21,8 +21,9 @@
 	export let containerClass = "one-time-pass";
 	export let separatorCLass = "";
 
-
-	$: joinedValue =  joinWithSeparators ? value?.join(separator) ?? "" :value?.join("") ?? "" ;
+	$: joinedValue = joinWithSeparators
+		? value?.join(separator) ?? ""
+		: value?.join("") ?? "";
 	let chunkInputs = [];
 
 	$: sanitizedValue = sanitizeValue(value, chunksCount);
@@ -33,16 +34,15 @@
 	$: IsComplete = calculateIsComplete(joinedValue);
 
 	//calculates IsComplete based on length of value
-function calculateIsComplete(joinedValue){
+	function calculateIsComplete(joinedValue) {
+		let completeLength =
+			chunksCount * (joinWithSeparators ? chunkLength + 1 : chunkLength);
+		//substruct 1 if they are separators ( one less separators then chunks)
+		if (joinWithSeparators) completeLength--;
+		return joinedValue?.length == completeLength ?? false;
+	}
 
-	let completeLength = chunksCount * (joinWithSeparators ?  chunkLength  + 1 :  chunkLength)
-	//substruct 1 if they are separators ( one less separators then chunks)
-	if(joinWithSeparators)
-		completeLength--;
-	return (joinedValue?.length ==  completeLength) ?? false;
-}
-
-//creates html pattern for inputs
+	//creates html pattern for inputs
 	function createPattern(numbers, length) {
 		return (numbers ? "[0-9]" : ".") + "{" + length + "}";
 	}
@@ -94,14 +94,13 @@ function calculateIsComplete(joinedValue){
 		);
 	}
 
-
 	function beforeChunkChanged(ev, idx) {
 		let invalid = false;
 		if (ev.data === null) {
 			if (sanitizedValue[idx].length === 1)
-			//moves cursor in next tick
+				//moves cursor in next tick
 				setTimeout(() => {
-				moveCursor(chunkInputs[idx - 1], chunkInputs[idx - 1].value.length);
+					moveCursor(chunkInputs[idx - 1], chunkInputs[idx - 1].value.length);
 				}, 0);
 			return;
 		}
@@ -150,7 +149,7 @@ function calculateIsComplete(joinedValue){
 	function keystroke(ev, idx) {
 		// 37: left 39: right 46:delete
 
-		if (ev.keyCode == 39||ev.keyCode == 46) {
+		if (ev.keyCode == 39 || ev.keyCode == 46) {
 			//only moves if you are on end of text
 			if (
 				chunkInputs[idx + 1] &&
@@ -195,7 +194,6 @@ function calculateIsComplete(joinedValue){
 		} else return event.target.value;
 	}
 
-
 	//will disable only if its empty
 	function isDisabled(idx, chunksFilled) {
 		return idx > chunksFilled && !chunkInputs[idx]?.value;
@@ -216,17 +214,15 @@ function calculateIsComplete(joinedValue){
 			<span class={separatorCLass}>{separator}</span>
 		{:else}
 			<Chunk
-				bind:inputElement={chunkInputs[i/2]}
+				bind:inputElement={chunkInputs[i / 2]}
 				value={chunkValue}
 				pattern={createPattern(onlyNumbers, chunkLength)}
-				disabled={isDisabled(i/2, ChunksFilledCount)}
+				disabled={isDisabled(i / 2, ChunksFilledCount)}
 				class={inputClass}
 				containerClass={inputContainerClass}
-				on:beforeinput={(ev) =>
-					beforeChunkChanged(ev, i/2)}
-				on:originalInput={({ detail: ev }) =>
-					chunkChanged(ev, i/2)}
-				on:keydown={(ev) => keystroke(ev, i/2)}
+				on:beforeinput={(ev) => beforeChunkChanged(ev, i / 2)}
+				on:originalInput={({ detail: ev }) => chunkChanged(ev, i / 2)}
+				on:keydown={(ev) => keystroke(ev, i / 2)}
 			/>
 		{/if}
 	{/each}

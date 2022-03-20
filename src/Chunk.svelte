@@ -24,7 +24,7 @@
 <div class="otp-field {$$restProps.containerClass || ''}" {title}>
 	<input
 		bind:this={inputElement}
-		class=" {$$restProps.class ||''}"
+		class=" {$$restProps.class || ''}"
 		{value}
 		{type}
 		{placeholder}
