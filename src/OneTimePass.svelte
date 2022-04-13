@@ -27,6 +27,7 @@
 	let rootElement
 
 	let chunkInputs = []
+	let moveToPreviousChunk = false
 
 	$: joinedValue = joinWithSeparators
 		? value?.join(separator) ?? ""
@@ -86,8 +87,9 @@
 	function chunksFilledChanged(val) {
 		let firstChunkNotFilledIndex = val?.map(x => x.length < chunkLength).findIndex(x => x)
 		//check if found
-		if (firstChunkNotFilledIndex !== -1) {
+		if (firstChunkNotFilledIndex !== -1 && !moveToPreviousChunk) {
 			setTimeout(() => {
+				console.log("Focusing not fulled chunk", firstChunkNotFilledIndex)
 				chunkInputs[firstChunkNotFilledIndex]?.focus()
 			}, 0)
 			// tick().then(() => {
@@ -107,13 +109,17 @@
 	}
 
 	function beforeChunkChanged(ev, idx) {
+		console.log("Before change", idx)
+
 		let invalid = false
 		if (ev.data === null) {
 			if (chunkInputs[idx - 1] && sanitizedValue[idx].length <= 1)
-				//moves cursor in next tick
-				setTimeout(() => {
-					moveCursor(chunkInputs[idx - 1], chunkInputs[idx - 1].value.length)
-				}, 0)
+				//moves cursor in next event
+				moveToPreviousChunk = true
+				// setTimeout(() => {
+				// 	console.log('changing cursor to ', idx - 1)
+				// 	moveCursor(chunkInputs[idx - 1], chunkInputs[idx - 1].value.length)
+				// }, 10)
 			return
 		}
 
@@ -140,10 +146,15 @@
 
 		if ((sanitizedValue[idx] + ev.data).length > chunkLength) {
 			if (!invalid) {
-				// Check if this is not last one
 				if (chunkInputs[idx + 1] && chunkInputs[idx + 1].value.length < chunkLength) {
 					chunkInputs[idx + 1].value = ev.data + chunkInputs[idx + 1].value
 					tick().then(() => {
+						// to update 'value' of this component
+						chunkInputs[idx + 1].dispatchEvent(new InputEvent("input", {
+							bubbles: true,
+							cancelable: true
+						}))
+						console.log("Focusing next input", idx + 1)
 						chunkInputs[idx + 1].focus()
 					})
 				}
@@ -187,7 +198,20 @@
 	}
 
 	function chunkChanged(ev, idx) {
-		value = getUpdatedChunks(sanitizedValue, getValueFromEvent(ev), idx)
+		updateChunk(idx, getValueFromEvent(ev))
+
+		if (moveToPreviousChunk) {
+			tick().then(() => {
+				console.log("Setting cursor", idx - 1)
+				moveCursor(chunkInputs[idx - 1], chunkInputs[idx - 1].value.length)
+				moveToPreviousChunk = false
+			})
+		}
+
+	}
+
+	function updateChunk(idx, val) {
+		value = getUpdatedChunks(sanitizedValue, val, idx)
 		dispatch("change", value)
 	}
 
@@ -196,14 +220,7 @@
 	}
 
 	function getValueFromEvent(event) {
-		if (event instanceof CustomEvent) {
-			// manual event
-			if (event.data === null) return event.substring(0, event.length - 1)
-			// because this event is composed from previous chunk - thus preceding the original value
-			else
-				return event.detail + event.target.value
-		} else
-			return event.target.value
+		return event.target.value
 	}
 
 	//will disable only if its empty
@@ -240,6 +257,7 @@
 				containerClass={inputContainerClass}
 				type={chunkType}
 				inputMode={chunkInputMode}
+				maxLength={chunkLength}
 				on:beforeinput={(ev) => beforeChunkChanged(ev, computeIndex(i, joinWithSeparators))}
 				on:originalInput={({ detail: ev }) => chunkChanged(ev, computeIndex(i, joinWithSeparators))}
 				on:keydown={(ev) => keystroke(ev, computeIndex(i, joinWithSeparators))}

@@ -11,6 +11,7 @@
 	export let inputMode = "numeric"
 	export let disabled = false
 	export let containerClass = null
+	export let maxLength = null
 
 	const dispatch = createEventDispatcher()
 
@@ -33,6 +34,7 @@
 		{placeholder}
 		{pattern}
 		{disabled}
+		maxlength={maxLength}
 		on:input={onInput}
 		on:change
 		on:beforeinput
