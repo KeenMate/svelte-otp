@@ -147,9 +147,8 @@
 
 	//moving between chunks with arrows and backspace
 	function keystroke(ev, idx) {
-		// 37: left 39: right 46:delete
 
-		if (ev.keyCode == 39 || ev.keyCode == 46) {
+		if (ev.key === "ArrowRight" || ev.key === "Delete") {
 			//only moves if you are on end of text
 			if (
 				chunkInputs[idx + 1] &&
@@ -161,7 +160,7 @@
 				});
 			}
 		}
-		if (ev.keyCode == 37 || ev.keyCode == 8) {
+		if (ev.key === "ArrowLeft" || ev.key === "Backspace") {
 			//only moves, if you are in the beginning and dont have any text selected
 			if (
 				chunkInputs[idx - 1] &&
