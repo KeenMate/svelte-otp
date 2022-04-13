@@ -89,7 +89,6 @@
 		//check if found
 		if (firstChunkNotFilledIndex !== -1 && !moveToPreviousChunk) {
 			setTimeout(() => {
-				console.log("Focusing not fulled chunk", firstChunkNotFilledIndex)
 				chunkInputs[firstChunkNotFilledIndex]?.focus()
 			}, 0)
 			// tick().then(() => {
@@ -109,17 +108,11 @@
 	}
 
 	function beforeChunkChanged(ev, idx) {
-		console.log("Before change", idx)
-
 		let invalid = false
 		if (ev.data === null) {
 			if (chunkInputs[idx - 1] && sanitizedValue[idx].length <= 1)
 				//moves cursor in next event
 				moveToPreviousChunk = true
-				// setTimeout(() => {
-				// 	console.log('changing cursor to ', idx - 1)
-				// 	moveCursor(chunkInputs[idx - 1], chunkInputs[idx - 1].value.length)
-				// }, 10)
 			return
 		}
 
@@ -154,7 +147,6 @@
 							bubbles: true,
 							cancelable: true
 						}))
-						console.log("Focusing next input", idx + 1)
 						chunkInputs[idx + 1].focus()
 					})
 				}
@@ -202,7 +194,6 @@
 
 		if (moveToPreviousChunk) {
 			tick().then(() => {
-				console.log("Setting cursor", idx - 1)
 				moveCursor(chunkInputs[idx - 1], chunkInputs[idx - 1].value.length)
 				moveToPreviousChunk = false
 			})
