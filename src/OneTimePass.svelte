@@ -21,7 +21,7 @@
 	//styles
 	export let inputClass = "otp-default-input"
 	export let inputContainerClass = "otp-default-field"
-	export let containerClass = "one-time-pass"
+	export let containerClass = null
 	export let separatorCLass = ""
 
 	let rootElement
@@ -226,7 +226,7 @@
 	}
 </script>
 
-<div class={containerClass}>
+<div bind:this={rootElement} class="one-time-pass {containerClass || ''}">
 	{#each sanitizedValueWithSeparators as chunkValue, i}
 		{#if joinWithSeparators && chunkValue === separator}
 			<span class={separatorCLass}>{separator}</span>
