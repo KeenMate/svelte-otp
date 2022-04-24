@@ -32,7 +32,7 @@ Component for inputing one time passwords (commonly use to confirm sms). You can
 
 ``` javascript
 <script>
-  import OneTimePass from "svelte-otp";
+  import {OneTimePass} from "svelte-otp";
   let value, onlyNumbers, chunksCount, chunkLength, valueWithSeparators;
 </script>
 
