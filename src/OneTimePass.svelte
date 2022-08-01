@@ -29,9 +29,8 @@
 	let chunkInputs = []
 	let moveToPreviousChunk = false
 
-	$: joinedValue = joinWithSeparators
-		? value?.join(separator) ?? ""
-		: value?.join("") ?? ""
+	$: updateValue(joinedValue)
+	$: updateJoinedValue(value)
 	$: rootElement?.style.setProperty("--chunk-width", chunkLength + "em")
 
 	$: sanitizedValue = sanitizeValue(value, chunksCount, joinWithSeparators)
@@ -39,6 +38,36 @@
 	$: chunksFilledCount = getChunksFilledCount(sanitizedValue)
 	$: chunksFilledChanged(sanitizedValue)
 	$: isComplete = calculateIsComplete(joinedValue, joinWithSeparators)
+
+	function updateValue(joinedVal) {
+		const val = splitVal(joinedVal)
+
+		if (val === joinValue(value))
+			return
+
+		value = val
+	}
+
+	function updateJoinedValue(val) {
+		const joined =  joinValue(val)
+
+		if (joined === joinedValue)
+			return
+
+		joinedValue = joined
+	}
+
+	function joinValue(val) {
+		return joinWithSeparators
+			? val?.join(separator) ?? ""
+			: val?.join("") ?? ""
+	}
+
+	function splitVal(val) {
+		return joinWithSeparators
+			? val?.split(separator) ?? ""
+			: val?.split("") ?? ""
+	}
 
 	//calculates isComplete based on length of value
 	function calculateIsComplete(joinedValue, joinWithSeparators_) {
