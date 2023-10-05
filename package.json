@@ -3,7 +3,11 @@
 	"version": "1.0.0",
 	"private": true,
 	"description": "customizable one time password input for svelte ",
-	"keywords": ["svelte","otp","svelte-otp"],
+	"keywords": [
+		"svelte",
+		"otp",
+		"svelte-otp"
+	],
 	"author": "zelvaman",
 	"license": "MIT",
 	"main": "src/index.js",
