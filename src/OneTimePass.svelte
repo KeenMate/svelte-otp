@@ -16,7 +16,7 @@
 	export let isComplete = false
 	export let joinWithSeparators = false
 	export let chunkType = "text"
-	export let chunkInputMode = "numeric"
+	export let chunkInputMode = null
 
 	//styles
 	export let inputClass = "otp-default-input"
@@ -49,7 +49,7 @@
 	}
 
 	function updateJoinedValue(val) {
-		const joined =  joinValue(val)
+		const joined = joinValue(val)
 
 		if (joined === joinedValue)
 			return
@@ -286,29 +286,35 @@
 	{/each}
 </div>
 
-<style lang="sass">
-		:global
-			.one-time-pass
-				display: flex
-				gap: 1rem
-				align-items: center
-				justify-content: center
+<style lang="scss">
+	:global {
+		.one-time-pass {
+			display: flex;
+			gap: 1rem;
+			align-items: center;
+			justify-content: center;
 
-				.otp-field
-					margin-bottom: 0 !important
+			.otp-field {
+				margin-bottom: 0 !important;
 
-					input
-						text-align: center
+				input {
+					text-align: center;
+				}
+			}
 
-				.otp-default-field
-					width: 3.5rem
+			.otp-default-field {
+				width: 3.5rem;
 
-			.otp-default-input
-				width: 100%
-				padding: 8px 12px
-				margin: 8px 0
-				display: inline-block
-				border: 1px solid #ccc
-				border-radius: 4px
-				box-sizing: border-box
+				.otp-default-input {
+					width: 100%;
+					padding: 8px 12px;
+					margin: 8px 0;
+					display: inline-block;
+					border: 1px solid #ccc;
+					border-radius: 4px;
+					box-sizing: border-box;
+				}
+			}
+		}
+	}
 </style>

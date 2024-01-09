@@ -8,7 +8,7 @@
 	export let placeholder = ""
 	export let pattern = null
 	export let type = "text"
-	export let inputMode = "numeric"
+	export let inputMode = null
 	export let disabled = false
 	export let containerClass = null
 	export let maxLength = null
