@@ -1,8 +1,8 @@
 {
-	"name": "svelte-otp",
+	"name": "@keenmate/svelte-otp",
 	"version": "1.0.0",
-	"private": true,
-	"description": "customizable one time password input for svelte ",
+	"repository": "https://github.com/keenmate/svelte-otp.git",
+	"description": "Customizable one time password input for svelte",
 	"keywords": [
 		"svelte",
 		"otp",
@@ -20,7 +20,15 @@
 	"scripts": {
 		"build": "npx rollup -c",
 		"dev": "rollup -c dev.rollup.config.js -w",
+		"prepublishOnly": "npm run build",
 		"start": "sirv dev --no-clear"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.mjs",
+			"svelte": "./dist/index.mjs"
+		}
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^17.0.0",
